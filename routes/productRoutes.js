@@ -47,7 +47,7 @@ const addProduct = async (req, res) => {
             const newProduct = await product.save();
             res.status(201).send(newProduct);
         }else{
-            res.status(400).send('Product Already Exists');
+            res.status(409).send('Product Already Exists');
         }
     }catch (err) {
         console.log(err);
@@ -63,7 +63,7 @@ const updateProduct = async (req, res) => {
         }
         const result = await Product.findByIdAndUpdate(req.params.id, {$inc: {currentStock:1}});
         if(!result){
-            res.status(400).send('Product Does Not Exist In Database')
+            res.status(404).send('Product Does Not Exist In Database')
         }else{
             res.status(200).send(result);
         }
@@ -81,7 +81,7 @@ const deleteProduct = async (req, res) => {
         }
         const result = await Product.findByIdAndDelete(req.params.id);
         if(!result){
-            res.status(400).send('Product Does Not Exist In Database');
+            res.status(404).send('Product Does Not Exist In Database');
         }else{
             res.status(200).send(result);
         }

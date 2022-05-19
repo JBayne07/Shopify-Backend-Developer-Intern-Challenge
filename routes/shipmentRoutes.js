@@ -34,7 +34,7 @@ const createShipment = async (req, res) => {
             const result = await shipment.save();
             res.status(201).send(result);
         }else{
-            res.status(400).send('Shipment Already Exists');
+            res.status(409).send('Shipment Already Exists');
             return;
         }        
     }catch (err) {
@@ -76,7 +76,7 @@ const addToShipment = async (req, res) => {
             }
         }
         const shipmentResult = await result.save();
-        res.status(201).send(shipmentResult);
+        res.status(200).send(shipmentResult);
 
     }catch (err) {
         console.log(err);
@@ -92,7 +92,7 @@ const deleteShipment = async (req, res) => {
         }
         const result = await Shipment.findByIdAndDelete(req.params.id);
         if(!result){
-            res.status(400).send('Shipment Does Not Exist In Database');
+            res.status(404).send('Shipment Does Not Exist In Database');
         }else{
             res.status(200).send(result);
         }
