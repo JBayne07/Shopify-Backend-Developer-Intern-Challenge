@@ -1,11 +1,11 @@
-**Goal**
+**Goal**\n
 The goal of this challenge was to create an inventory tracking web application. I built a backend to allow a user to add products to the inventory, update the current
 stock of a specific product, delete a specific product, and view the name, manufacturer and current stock of a specific product. The web application also allows a user
 to create a shipment, assigning products to the shipment, whilst also removing products from the inventory. The web applications also allows a user to delete a shipment
 and to view the products in the shipment.
 
 **Documentation**
-(GET) /api/products/:id
+(GET) /api/products/:id\n
   - (200) A JSON Object returning the product object
   - (400) Invalid id
   - (404) Product does not exist in the database
