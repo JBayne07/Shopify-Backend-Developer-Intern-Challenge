@@ -49,3 +49,9 @@ and to view the products in the shipment.
   - (400) Invalid id
   - (404) Shipment does not exist in the database
   - (500) Internal Server Error
+
+## Tech Stack
+I used ExpressJS as my backend framework with MongoDB for my main storage.
+
+## Testing
+You can easily test the inventory tracking web application by downloading postman.
