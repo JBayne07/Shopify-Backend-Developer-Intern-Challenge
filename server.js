@@ -1,10 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose')
 const app = express();
-const routes = require('./routes/routes');
 const cors = require('cors');
 require('dotenv').config();
-port = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
@@ -15,8 +13,9 @@ mongoose.connect(process.env.DB, (err) => {
     console.log('Database Connected');
 });
 
-app.use('/api', routes);
+app.use('/api', require('./routes/productRoutes'));
+app.use('/api', require('./routes/shipmentRoutes'));
 
-app.listen(port, () => {
-    console.log('Listening on http://localhost:' + port)
+app.listen(process.env.PORT, () => {
+    console.log('Listening on http://localhost:' + process.env.PORT)
 });
