@@ -67,16 +67,16 @@ const addToShipment = async (req, res) => {
         }      
 
         if(!result.products.length){
-            result.products.push({id:req.body.productId, stock: 1});
+            result.products.push({_id:req.body.productId, stock: 1});
         }else{
             for(let i = 0; i < result.products.length; ++i){                
-                if(result.products[i].id.toString() === req.body.productId){
+                if(result.products[i]._id.toString() === req.body.productId){
                     if(!productResult) break;
                     result.products[i].stock++;
                     break;
                 }
                 if(i === result.products.length-1){
-                    result.products.push({id:req.body.productId, stock: 1});
+                    result.products.push({_id:req.body.productId, stock: 1});
                 }
             }
         }
