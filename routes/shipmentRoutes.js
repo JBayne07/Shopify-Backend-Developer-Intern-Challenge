@@ -11,7 +11,6 @@ const getShipment = async (req,res) => {
             return;
         }
         const result = await Shipment.findById(req.params.id);
-        console.log(result);
         if(!result){
             res.status(404).send('Shipment Does Not Exist In Database');
         }else{
@@ -33,7 +32,6 @@ const createShipment = async (req, res) => {
         if(!shipmentResult){
             let shipment = new Shipment({name: req.body.name});
             const result = await shipment.save();
-            console.log(result);
             res.status(201).send(result);
         }else{
             res.status(400).send('Shipment Already Exists');
@@ -46,21 +44,18 @@ const createShipment = async (req, res) => {
 }
 
 const addToShipment = async (req, res) => {
-    console.log('add Shipment', req.params, req.body);
     try{
         if(!isValidObjectId(req.params.id) || !isValidObjectId(req.body.productId)){
             res.status(400).send('Bad Request');
             return;
         }
         const result = await Shipment.findById(req.params.id);
-        console.log('Result:', result);
         if(!result){
             res.status(404).send('Shipment Does Not Exist In Database');
             return;
         }
 
         const productResult = await Product.findOneAndUpdate({_id:req.body.productId, currentStock:{$gt:0}}, {$inc: {currentStock:-1}});
-        console.log('Product Result:', productResult);
         if(!productResult){
             res.status(404).send('Product Is Not Available');
             return;
@@ -81,7 +76,6 @@ const addToShipment = async (req, res) => {
             }
         }
         const shipmentResult = await result.save();
-        console.log('Shipment Result:', shipmentResult);
         res.status(201).send(shipmentResult);
 
     }catch (err) {
@@ -97,7 +91,6 @@ const deleteShipment = async (req, res) => {
             return;
         }
         const result = await Shipment.findByIdAndDelete(req.params.id);
-        console.log(result);
         if(!result){
             res.status(400).send('Shipment Does Not Exist In Database');
         }else{

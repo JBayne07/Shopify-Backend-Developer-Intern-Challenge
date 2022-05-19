@@ -10,7 +10,6 @@ const getProduct = async (req, res) => {
             return;
         }
         const result = await Product.findById(req.params.id);
-        console.log(result);
         if(!result){
             res.status(404).send('Product Does Not Exist In Database');
         }else{            
@@ -25,7 +24,6 @@ const getProduct = async (req, res) => {
 const getProducts = async (req, res) => {
     try{
         const results = await Product.find();
-        console.log(results);
         if(!results.length){
             res.status(404).send('No Products Exist In The Database');
         }else{
@@ -47,8 +45,7 @@ const addProduct = async (req, res) => {
         if(!result){
             let product = new Product({name: req.body.name, manufacturer: req.body.manufacturer, currentStock: 1});
             const newProduct = await product.save();
-            console.log(result);
-            res.status(201).send(result);
+            res.status(201).send(newProduct);
         }else{
             res.status(400).send('Product Already Exists');
         }
@@ -65,7 +62,6 @@ const updateProduct = async (req, res) => {
             return;
         }
         const result = await Product.findByIdAndUpdate(req.params.id, {$inc: {currentStock:1}});
-        console.log(result);
         if(!result){
             res.status(400).send('Product Does Not Exist In Database')
         }else{
@@ -84,7 +80,6 @@ const deleteProduct = async (req, res) => {
             return;
         }
         const result = await Product.findByIdAndDelete(req.params.id);
-        console.log(result);
         if(!result){
             res.status(400).send('Product Does Not Exist In Database');
         }else{
